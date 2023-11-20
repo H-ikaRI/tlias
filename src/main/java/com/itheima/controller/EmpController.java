@@ -1,12 +1,12 @@
 package com.itheima.controller;
 
+import com.itheima.anno.Log;
 import com.itheima.pojo.Emp;
 import com.itheima.pojo.PageBean;
 import com.itheima.pojo.Result;
 import com.itheima.service.DeptService;
 import com.itheima.service.EmpService;
 import lombok.Builder;
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -44,6 +44,7 @@ public class EmpController {
     }
 
     @DeleteMapping("/{ids}")
+    @Log
     public Result delete(@PathVariable List<Integer> ids){
         log.info("删除所选员工:{}",ids);
         empService.delete(ids);
@@ -51,6 +52,7 @@ public class EmpController {
     }
 
     @RequestMapping
+    @Log
     public Result save(@RequestBody Emp emp){
         log.info("新增员工信息,{}", emp);
         empService.save(emp);
@@ -66,8 +68,9 @@ public class EmpController {
     }
 
     @PutMapping()
+    @Log
     public Result upload(@RequestBody Emp emp){
-        log.info("打印的对象是{}",emp);
+        log.info("更新的对象是{}",emp);
         empService.update(emp);
         return Result.success();
     }
