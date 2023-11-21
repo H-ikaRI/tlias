@@ -31,6 +31,7 @@ import java.util.List;
 public class EmpController {
     @Autowired
     private EmpService empService;
+    //分页展示员工
     @GetMapping
     public Result page(@RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "10") Integer pageSize,
@@ -42,7 +43,7 @@ public class EmpController {
         PageBean pagebean= empService.page(page,pageSize,name,gender,begin,end);
         return Result.success(pagebean);
     }
-
+    //删除员工
     @DeleteMapping("/{ids}")
     @Log
     public Result delete(@PathVariable List<Integer> ids){
@@ -51,6 +52,7 @@ public class EmpController {
         return Result.success();
     }
 
+    //新增员工
     @RequestMapping
     @Log
     public Result save(@RequestBody Emp emp){
@@ -59,6 +61,7 @@ public class EmpController {
         return Result.success();
     }
 
+    //获得员工的id
     @GetMapping("/{id}")
     public Result getById(@PathVariable Integer id){
         log.info("输入的id为{}",id);
@@ -67,6 +70,7 @@ public class EmpController {
         return Result.success(emp);
     }
 
+    //根据id修改员工
     @PutMapping()
     @Log
     public Result upload(@RequestBody Emp emp){
